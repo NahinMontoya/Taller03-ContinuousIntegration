@@ -44,6 +44,10 @@ def test_validar_cantidad_pedido_fallido_FueraDeRango():
     cantidad = "125"
     assert validar_cantidad_pedido(cantidad) == None
 
+def test_validar_cantidad_pedido_fallido_DentroDeRango():
+    cantidad = "99"
+    assert validar_cantidad_pedido(cantidad) != None
+
 
 
 
