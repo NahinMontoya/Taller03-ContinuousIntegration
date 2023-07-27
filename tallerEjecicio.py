@@ -21,7 +21,6 @@ def mostrar_programa_gastronomico():
     return menu_principal
 
 
-
 def calcular_descuentos(pedido):
     costo_total = 0
     cantidad_total=0
@@ -54,7 +53,6 @@ def validar_cantidad_pedido(cantidad):
             return cantidad
     except ValueError:
         pass
-
     return None
 
 def programa_gastronomico():
@@ -66,7 +64,7 @@ def programa_gastronomico():
 
         if comida not in menu:
             print("¡Error! Comida no disponible en el menú.")
-            continue
+            break
 
         cantidad_valida = False
         while not cantidad_valida:
@@ -75,8 +73,10 @@ def programa_gastronomico():
 
             if cantidad_validada is None:
                 print("¡Error! Cantidad no válida. Debe ser un número entero positivo menor o igual a 100.")
+                break
             else:
                 cantidad_valida = True
+
 
         pedido[comida] = (menu[comida], cantidad_validada)  # Almacenar nombre de la comida y cantidad en una tupla.
 
@@ -84,7 +84,9 @@ def programa_gastronomico():
 
         if continuar_pedido == 'no':
             break
-
+    for comida, (precio, cantidad) in pedido.items():
+        if cantidad is None:
+            return -1
     print("\nDetalles del pedido:")
     for comida, (precio, cantidad) in pedido.items():  # Desempaquetar el valor de la tupla.
         print(f"{comida}: {cantidad} x ${precio} = ${precio * cantidad}")  # Calcular el precio total por comida.
